@@ -87,7 +87,6 @@ public class CarDAOImpl extends AbstractDao implements CarDAO {
     @Override
     public boolean changeToActive(long id) throws SQLException {
         LOG.info("CarDaoImpl.changeToActive()");
-
         psSetActive = prepareStatement(SET_ACTIVE);
         psSetActive.setLong(1, id);
         psSetActive.executeUpdate();
@@ -98,7 +97,6 @@ public class CarDAOImpl extends AbstractDao implements CarDAO {
     @Override
     public Car save(Car car) throws SQLException {
         LOG.info("CarDaoImpl.save()");
-
         psSave = prepareStatement(ADD_NEW_CAR, Statement.RETURN_GENERATED_KEYS);
         psSave.setString(1, car.getCarName());
         psSave.setDouble(2, car.getPricePerDay());

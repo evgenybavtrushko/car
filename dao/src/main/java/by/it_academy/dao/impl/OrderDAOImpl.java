@@ -160,7 +160,6 @@ public class OrderDAOImpl extends AbstractDao implements OrderDAO {
         order.setRefusalReason(rs.getString(8));
         order.setDamages(rs.getString(9));
         order.setStatus(rs.getString(10));
-        System.out.println(order);
         return order;
     }
     @Override
