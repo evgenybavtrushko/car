@@ -1,14 +1,8 @@
-package by.it_academy.dao;
+package by.it_academy.services;
 
-public interface DAO<T> {
-
+public interface IService <T> {
     T add(T t);
-
     T update(T t);
-
     T get(Long id);
-
     void delete(Long id);
-
-
 }

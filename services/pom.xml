@@ -13,6 +13,7 @@
   <artifactId>services</artifactId>
   <version>1.0</version>
   <name>services</name>
+  <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
 
   <properties>

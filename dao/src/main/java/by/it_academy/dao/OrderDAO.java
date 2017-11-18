@@ -8,21 +8,25 @@ import java.util.List;
 
 public interface OrderDAO extends DAO<Order> {
 
-    boolean specifyTheReasonForFailure(long id, String refusalReason) throws SQLException;
+    boolean specifyTheReasonForFailure(Long id, String refusalReason) ;
 
-    boolean indicateDamage(long id, String damages) throws SQLException;
+    boolean indicateDamage(Long id, String damages) ;
 
-    List<Order> getByUserId(long id) throws SQLException;
+    List<Order> getByUserId(Long id) ;
 
-    List<Order> getAllNewOrders() throws SQLException;
+    List<Order> getAllNewOrders() ;
 
-    boolean changeOrderStatus(long id, String status) throws SQLException;
+    boolean changeOrderStatus(Long id, String status) ;
 
-    List<OrderDTO> getAllDTO() throws SQLException;
 
-    List<OrderDTO> getByUserIdDTO(long id) throws SQLException;
 
-    List<OrderDTO> getAllNewOrdersDTO() throws SQLException;
+
+
+    List<OrderDTO> getAllDTO();
+
+    List<OrderDTO> getByUserIdDTO(Long id) ;
+
+    List<OrderDTO> getAllNewOrdersDTO() ;
 
 
 

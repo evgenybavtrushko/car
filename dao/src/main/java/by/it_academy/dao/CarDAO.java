@@ -6,8 +6,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface CarDAO extends DAO<Car> {
-    List<Car> getAllActiveCar() throws SQLException;
-    boolean changeToActive(long id) throws SQLException;
-    boolean changeToInActive(long id) throws SQLException;
+    List<Car> getAllActiveCar();
+
+    List<Car> getAllCar();
+
+    boolean changeToActive(Long id);
+
+    boolean changeToInActive(Long id);
 
 }

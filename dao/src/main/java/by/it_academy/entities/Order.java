@@ -1,89 +1,66 @@
 package by.it_academy.entities;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ORDERS")
 public class Order {
-    private long orderId;
-    private long userId;
-    private long carId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
     private double total;
-    private Date date;
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+    @Column
     private Date rentalStartDate;
+    @Column
     private int period;
+    @Column
     private String refusalReason;
+    @Column
     private String damages;
-    private OrderStatus status;
 
-    public String getStatus() {
-        switch (status) {
-            case NEW: {
-                return "NEW";
-            }
-            case  APPROVED_BY: {
-               return "APPROVED_BY";
-            }
-            case DENIED: {
-            return "DENIED";
-        }
-            case ARCHIVE: {
-                return "ARCHIVE";
-            }
-            default:
-                return null;
-        }
-    }
-    public void setStatus(String s) {
+    @ManyToOne
+    private OrderProfile status;
 
-        switch (s.toUpperCase()) {
-            case "NEW": {
-                this.status = OrderStatus.NEW;
-                return;
-            }
-            case "APPROVED_BY": {
-                this.status = OrderStatus.APPROVED_BY;
-                return;
+    @ManyToOne
+    private User user;
 
-            }case "DENIED": {
-                this.status = OrderStatus.DENIED;
-                return;
-            }
-            case "ARCHIVE": {
-                this.status = OrderStatus.ARCHIVE;
-            }
-                default:
-                    return;
+    @ManyToOne
+    private Car car;
 
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+
+        Order order = (Order) o;
+
+        if (id != null ? !id.equals(order.id) : order.id != null) return false;
+        if (refusalReason != null ? !refusalReason.equals(order.refusalReason) : order.refusalReason != null) return false;
+        return damages != null ? damages.equals(order.damages) : order.damages == null;
     }
 
-    public Order(long userId, long carId, double total, Date rentalStartDate, int period) {
-        this.userId = userId;
-        this.carId = carId;
-        this.total = total;
-        this.date = (new Date(System.currentTimeMillis()));
-        this.rentalStartDate = rentalStartDate;
-        this.period = period;
-        this.status = OrderStatus.NEW;
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
+
     @Override
     public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", userId=" + userId +
-                ", carId=" + carId +
-                ", total=" + total +
-                ", date=" + date +
-                ", rentalStartDate=" + rentalStartDate +
-                ", period=" + period +
-                ", refusalReason='" + refusalReason + '\'' +
-                ", damages='" + damages + '\'' +
-                ", status=" + status +
-                '}';
+        return "Order : id: " + id + " damages: " + damages + " refusalReason: " + refusalReason + " createdDate: " +createdDate;
     }
 }

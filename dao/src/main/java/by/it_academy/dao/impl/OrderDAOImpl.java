@@ -4,24 +4,104 @@ import by.it_academy.dao.OrderDAO;
 import by.it_academy.entities.Order;
 import by.it_academy.dto.OrderDTO;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class OrderDAOImpl extends AbstractDao implements OrderDAO {
-
-    private static volatile OrderDAO instance = null;
-
-
+@Repository
+public class OrderDAOImpl extends BaseDao<Order> implements OrderDAO {
     private static final Logger LOG = Logger.getLogger(CarDAOImpl.class);
 
+    @Override
+    public boolean specifyTheReasonForFailure(Long id, String refusalReason) {
+        return false;
+    }
 
-    private static final String SET_REFUSAL_REASON = "UPDATE orders SET orders.refusal_reason = ? "
+    @Override
+    public boolean indicateDamage(Long id, String damages) {
+        return false;
+    }
+
+    @Override
+    public List<Order> getByUserId(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Order> getAllNewOrders() {
+        return null;
+    }
+
+    @Override
+    public boolean changeOrderStatus(Long id, String status) {
+        return false;
+    }
+
+    @Override
+    public List<OrderDTO> getAllDTO() {
+        return null;
+    }
+
+    @Override
+    public List<OrderDTO> getByUserIdDTO(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<OrderDTO> getAllNewOrdersDTO() {
+        return null;
+    }
+
+   /* @Override
+    public boolean specifyTheReasonForFailure(Long id, String refusalReason) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean indicateDamage(Long id, String damages) throws SQLException {
+
+        return false;
+    }
+
+    @Override
+    public List<Order> getByUserId(Long id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Order> getAllNewOrders() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean changeOrderStatus(Long id, String status) throws SQLException {
+        return false;
+    }
+
+
+    @Override
+    public List<OrderDTO> getAllDTO() throws SQLException {
+        return null;*//*getEntityManager()
+                .createQuery("select o.orderId, u.name, c.carName, o.total, o.date, o.rentalStartDate, " +
+                "o.period, o.refusalReason, o.damages, o.status " +
+                "from \'Order\' o " +
+                "join User u ON o.userId = u.id " +
+                "join Car c ON o.carId = c.carId").getResultList();*//*
+    }
+
+    @Override
+    public List<OrderDTO> getByUserIdDTO(Long id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<OrderDTO> getAllNewOrdersDTO() throws SQLException {
+        return null;
+    }*/
+}
+
+
+    /*private static final String SET_REFUSAL_REASON = "UPDATE orders SET orders.refusal_reason = ? "
             + " where orders.order_id =?;";
 
     private static final String SET_DAMAGES = "UPDATE orders SET orders.damages = ? "
@@ -300,5 +380,4 @@ public class OrderDAOImpl extends AbstractDao implements OrderDAO {
         order.setDamages(rs.getString(9));
         order.setStatus(rs.getString(10));
         return order;
-    }
-}
+    }*/

@@ -1,21 +1,72 @@
 package by.it_academy.services.impl;
 
 import by.it_academy.dao.UserDao;
-import by.it_academy.dao.impl.UserDaoImpl;
 import by.it_academy.entities.User;
-import by.it_academy.services.ServiceException;
-import by.it_academy.services.UserService;
+import by.it_academy.services.IUserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
-
-public class UserServiceImpl extends AbstractService implements UserService {
+@Service
+@Transactional
+public class UserServiceImpl extends BaseService<User> implements IUserService {
     private static final Logger LOG = Logger.getLogger(UserServiceImpl.class);
 
-    private static volatile UserService INSTANCE = null;
-    private UserDao userDao = UserDaoImpl.getInstance();
+    @Autowired
+    UserDao userDao;
 
+    @Override
+    public User getByLogin(String login) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllActiveUsers() {
+        return null;
+    }
+
+    @Override
+    public boolean changePassword(long id, String pass, String newPassword) {
+        return false;
+    }
+
+    @Override
+    public boolean changeEmail(long id, String newEmail) {
+        return false;
+    }
+
+    @Override
+    public boolean changeActive(long id, boolean active) {
+        return false;
+    }
+
+    @Override
+    public User create(String name, String password, String address, String email, String login) {
+        return null;
+    }
+
+    @Override
+    public User get(long id) {
+        return null;
+    }
+
+    @Override
+    public int delete(long id) {
+        return 0;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return null;
+    }
+
+    @Override
+    public boolean checkLogin(String login) {
+        return false;
+    }
+   /*
     @Override
     public User getByLogin(String login) {
         try {
@@ -114,18 +165,6 @@ public class UserServiceImpl extends AbstractService implements UserService {
         } catch (SQLException e) {
             throw new ServiceException("Error getting checkLogin");
         }
-    }
-    public static UserService getInstance() {
-        UserService userService = INSTANCE;
-        if (userService == null) {
-            synchronized (UserServiceImpl.class) {
-                userService = INSTANCE;
-                if (userService == null) {
-                    INSTANCE = userService = new UserServiceImpl();
-                }
-            }
-        }
-        return userService;
-    }
+    }*/
 }
 

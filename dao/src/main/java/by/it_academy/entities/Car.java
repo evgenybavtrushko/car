@@ -1,29 +1,25 @@
 package by.it_academy.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Car {
-    private long carId;
-    private String carName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
+    private String name;
+    @Column(name = "PRICE_PER_DAY")
     private double pricePerDay;
+    @Column
     private boolean active;
+    @Column
     private String image;
-
-    public Car(String carName, Double pricePerDay, String image) {
-        this.carName = carName;
-        this.pricePerDay = pricePerDay;
-        this.image = image;
-        this.active = true;
-    }
-
-    public Car(long carId, String carName, double pricePerDay, boolean active, String image) {
-        this.carId = carId;
-        this.carName = carName;
-        this.pricePerDay = pricePerDay;
-        this.active = active;
-        this.image = image;
-    }
 }

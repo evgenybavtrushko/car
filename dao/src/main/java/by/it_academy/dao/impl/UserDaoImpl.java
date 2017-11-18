@@ -3,21 +3,98 @@ package by.it_academy.dao.impl;
 import by.it_academy.dao.UserDao;
 import by.it_academy.entities.User;
 import org.apache.log4j.Logger;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import org.springframework.stereotype.Repository;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-public class UserDaoImpl extends AbstractDao implements UserDao {
+import java.util.List;
+@Repository
+public class UserDaoImpl extends BaseDao<User> implements UserDao {
     private static final Logger LOG = Logger.getLogger(CarDAOImpl.class);
 
 
-    private static volatile UserDao INSTANCE = null;
 
-    private static final String SAVE_USER_QUERY =
+
+
+
+
+
+
+
+
+
+
+    public UserDaoImpl() {
+        super();
+        clazz = User.class;
+    }
+
+    @Override
+    public User getByLogin(String login) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllActiveUsers() {
+        return null;
+    }
+
+    @Override
+    public boolean changePassword(long id, String password, String newPassword) {
+        return false;
+    }
+
+    @Override
+    public boolean changeEmail(long id, String newEmail) {
+        return false;
+    }
+
+    @Override
+    public boolean changeActive(long id, boolean active) {
+        return false;
+    }
+
+    @Override
+    public boolean checkLogin(String login) {
+        return false;
+    }
+
+   /* @Override
+    public User getByLogin(String login) throws SQLException {
+        return null;
+    }*/
+
+  /*  @Override
+    public List<User> getAllActiveUsers()  {
+        return getEntityManager().createQuery("from user where active =:active")
+                .setParameter("active", true)
+                .getResultList();
+    }*/
+}
+   /* @Override
+    public boolean changePassword(long id, String password, String newPassword) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean changeEmail(long id, String newEmail) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean changeActive(long id, boolean active) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean checkLogin(String login) throws SQLException {
+        return false;
+    }*/
+
+
+
+
+
+   /* private static final String SAVE_USER_QUERY =
             "INSERT INTO user (name, login, password, address, email) VALUES (?, ?, ?, ?, ?)";
     private static final String GET_USER_QUERY =
             "SELECT * FROM user WHERE user_id = ?";
@@ -212,5 +289,4 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         user.setEmail(rs.getString("email"));
         user.setType(rs.getString("type"));
         return user;
-    }
-}
+    }*/

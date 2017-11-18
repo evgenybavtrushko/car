@@ -1,45 +1,68 @@
 package by.it_academy.entities;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@Setter
-@Getter
+@AllArgsConstructor
+@Entity
 public class User {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
+    private Long id;
+    @Column
     private String name;
+    @Column
     private String login;
+    @Column
     private String password;
+    @Column
     private boolean active;
+    @Column
     private String address;
+    @Column
     private String email;
-    private String type;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders =  new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_USER_PROFILE",
+            joinColumns = { @JoinColumn(name = "USER_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "PROFILE_ID") })
+    private Set<UserProfile> personProfiles = new HashSet<>();
 
 
-    public User(String name, String login, String password, String address, String email) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.active = true;
-        this.address = address;
-        this.email = email;
-        this.type = "USER";
+
+
+
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User person = (User) o;
+        if (id != null ? !id.equals(person.id) : person.id != null) return false;
+        if (login != null ? !login.equals(person.login) : person.login != null) return false;
+        return name != null ? name.equals(person.name) : person.name == null;
     }
 
-    public User(long id, String name, String login, String password,
-                boolean active, String address, String email, String type) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.active = active;
-        this.address = address;
-        this.email = email;
-        this.type = type;
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
+    @Override
+    public String toString() {
+        return "Person : id: " + id + " Name: " + name + " Surname: ";
+    }
 }

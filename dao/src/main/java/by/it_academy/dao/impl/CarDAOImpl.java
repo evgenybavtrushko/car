@@ -4,19 +4,56 @@ import by.it_academy.dao.CarDAO;
 import by.it_academy.entities.Car;
 import org.apache.log4j.Logger;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-public class CarDAOImpl extends AbstractDao implements CarDAO {
 
-    private static volatile CarDAO INSTANCE = null;
 
+@Repository
+public class CarDAOImpl extends BaseDao<Car> implements CarDAO {
     private static final Logger LOG = Logger.getLogger(CarDAOImpl.class);
 
+    public CarDAOImpl() {
+        super();
+        clazz = Car.class;
+    }
+
+    public List<Car> getAllActiveCar() {
+        LOG.info("CarDaoImpl.getAllActive()");
+        return getEntityManager().createQuery("from Car where active =:active")
+                .setParameter("active", true)
+                .getResultList();
+    }
+
+    @Override
+    public List<Car> getAllCar() {
+        LOG.info("CarDaoImpl.getAllCar()");
+        return getEntityManager().createQuery("from Car ")
+                .getResultList();
+    }
+
+
+
+    @Override
+    public boolean changeToActive(Long id) {
+        return false;
+    }
+
+    @Override
+    public boolean changeToInActive(Long id) {
+        return false;
+    }
+}
+
+
+
+   /* boolean changeToActive(Long id) {
+
+    };
+    boolean changeToInActive(Long id) {
+
+    };
 
     private static final String SELECT_ALL_ACTIVE = "SELECT * FROM car WHERE car.active = true;";
 
@@ -47,21 +84,7 @@ public class CarDAOImpl extends AbstractDao implements CarDAO {
     private PreparedStatement psDelete;
     private PreparedStatement psGetAllCar;
 
-    private CarDAOImpl() {
-    }
 
-    public static CarDAO getInstance() {
-        CarDAO carDAO = INSTANCE;
-        if (carDAO == null) {
-            synchronized (CarDAOImpl.class) {
-                carDAO = INSTANCE;
-                if (carDAO == null) {
-                    INSTANCE = carDAO = new CarDAOImpl();
-                }
-            }
-        }
-        return carDAO;
-    }
 
     @Override
     public List<Car> getAllActiveCar() throws SQLException {
@@ -155,5 +178,5 @@ public class CarDAOImpl extends AbstractDao implements CarDAO {
         car.setActive(rs.getBoolean(4));
         car.setImage(rs.getString(5));
         return car;
-    }
-}
+    }*/
+
